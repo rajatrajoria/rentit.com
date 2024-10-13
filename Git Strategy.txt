@@ -1,0 +1,124 @@
+1. Use Feature Branches
+Adopting a feature branch strategy is key to organizing your work when developing new features. This keeps your main branch clean and prevents incomplete or buggy code from affecting others.
+
+Steps to Create a Feature Branch:
+Checkout from the main branch:
+
+First, ensure you’re on the latest version of the main branch (usually main or master).
+bash
+Copy code
+git checkout main
+git pull origin main
+Create a new branch for your feature:
+
+Name your branch clearly based on the feature you’re adding.
+bash
+Copy code
+git checkout -b feature/notification-new-reminder-feature
+In this example, you’re creating a branch for the new reminder feature in the Notification Microservice.
+
+2. Commit Regularly and Meaningfully
+As you develop the new feature, commit your changes incrementally. Each commit should represent a logical step in the development process.
+
+Best Practices for Commit Messages:
+Write clear and concise commit messages that explain what and why changes were made.
+Use an imperative mood (e.g., "Add reminder functionality to notification service").
+Example:
+bash
+Copy code
+git commit -m "Add email reminder functionality to notification microservice"
+3. Versioning Your Microservice
+If you're following semantic versioning (recommended), increment the version of your Notification Microservice based on the type of change you're making:
+
+Patch (X.Y.Z → X.Y.Z+1): If you’re making backward-compatible bug fixes.
+Minor (X.Y.Z → X.Y+1.Z): If you’re adding backward-compatible new features (which applies to your case).
+Major (X.Y.Z → X+1.Y.Z): If you’re introducing incompatible API changes.
+Versioning in package.json or pom.xml:
+If your microservice is in Node.js, update the version field in package.json.
+json
+Copy code
+{
+  "name": "notification-service",
+  "version": "1.2.0",  // Updated for a new minor feature
+  ...
+}
+If your microservice is in Java (Spring Boot), update the version in pom.xml if needed:
+xml
+Copy code
+<version>1.2.0</version>
+4. Test the New Feature in Isolation
+Before merging your feature branch back into the main branch, thoroughly test the new feature:
+
+Write unit tests and, if applicable, integration tests to cover the new functionality.
+Run existing tests to ensure no regressions have been introduced.
+Use a CI tool (like GitHub Actions, Jenkins, or GitLab CI) to automatically run tests on your feature branch.
+5. Push the Feature Branch to Remote Repository
+Once you’re satisfied with your local development, push your feature branch to the remote repository.
+
+bash
+Copy code
+git push origin feature/notification-new-reminder-feature
+This creates a copy of your branch on the remote repository, allowing others to see your work or collaborate if needed.
+
+6. Create a Pull Request (PR)
+When the feature is complete and tested, create a pull request (PR) to merge the feature branch back into the main branch.
+
+Title: Use a descriptive title (e.g., "Add reminder functionality to notification microservice").
+Description: Explain what the feature does, how it works, and any important implementation details. If there are breaking changes, clearly mention them.
+Link issues: If the feature is associated with a ticket or issue, reference it in the PR.
+Code Review:
+Once the PR is open, team members can review the code, suggest improvements, and ensure the feature meets the quality standards.
+After review, the feature can be merged into the main branch.
+7. Merge the Feature Branch
+Once your feature is approved, merge the branch into the main branch:
+
+Rebase the feature branch onto the latest main branch to ensure it's up to date and has no conflicts:
+
+bash
+Copy code
+git checkout main
+git pull origin main
+git checkout feature/notification-new-reminder-feature
+git rebase main
+Merge the feature branch:
+
+After rebasing, either merge the branch through the GitHub/GitLab UI or from the terminal:
+bash
+Copy code
+git checkout main
+git merge feature/notification-new-reminder-feature
+Delete the feature branch after merging:
+
+bash
+Copy code
+git branch -d feature/notification-new-reminder-feature
+8. Tag the Release (Optional)
+Once the new feature is merged into the main branch and is ready for deployment, you can create a Git tag to mark the new version.
+
+Example: Tagging version 1.2.0 after a new feature is added.
+bash
+Copy code
+git tag -a v1.2.0 -m "Release version 1.2.0 with new reminder feature"
+git push origin v1.2.0
+This ensures that the version is marked in Git history, making it easier to track when specific features were added or changes were made.
+
+9. CI/CD Pipeline for Deployment
+Once the feature is merged into the main branch, your CI/CD pipeline should automatically trigger:
+
+Build and test the microservice.
+Deploy the updated service to the staging or production environment based on your setup.
+If you're using Docker, ensure that a new Docker image is built with the updated version tag and pushed to your container registry.
+
+bash
+Copy code
+docker build -t notification-service:1.2.0 .
+docker push myregistry.com/notification-service:1.2.0
+Summary of Git Workflow for New Feature:
+Create a new feature branch from the main branch.
+Commit regularly with clear, meaningful messages.
+Update the version in package.json or pom.xml using semantic versioning (e.g., 1.1.0 → 1.2.0 for new features).
+Test thoroughly (unit, integration).
+Push the feature branch to the remote repository.
+Create a pull request for code review.
+Merge the feature branch into the main branch.
+Optionally, tag the release.
