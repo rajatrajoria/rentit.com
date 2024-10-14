@@ -8,7 +8,7 @@ This platform leverages a **microservices architecture** to provide flexibility,
 
 ## **Architecture Overview**
 
-Rentit.com follows a microservices architecture, primarily consisting of **7 key microservices**, each responsible for different aspects of the application. This separation allows independent scaling, ease of maintenance, and modular development.
+Rentit.com follows a microservices architecture, primarily consisting of **microservices**, each responsible for different aspects of the application. This separation allows independent scaling, ease of maintenance, and modular development.
 
 ### **Microservices Breakdown**
 
