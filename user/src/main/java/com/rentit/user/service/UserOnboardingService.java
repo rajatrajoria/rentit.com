@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class OnboardService {
+public class UserOnboardingService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
