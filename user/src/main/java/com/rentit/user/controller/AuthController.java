@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
     private UserOnboardingService userOnboardingService;
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDTO userRegistrationDTO){
         userOnboardingService.registerUser(userRegistrationDTO);
         return ResponseEntity.status(HttpStatus.OK).body("User has been registered successfully");
