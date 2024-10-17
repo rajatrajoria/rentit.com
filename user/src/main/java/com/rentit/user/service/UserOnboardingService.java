@@ -20,6 +20,8 @@ public class UserOnboardingService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;;
 
     public void registerUser(UserRegistrationDTO userDTO){
         Optional<UserEntity> existingUser = userRepository.findByEmail(userDTO.getEmail());
@@ -41,6 +43,6 @@ public class UserOnboardingService {
         if(!passwordEncoder.matches(userLoginDTO.getPassword(), existingUser.get().getPassword())){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect email or password");
         }
-        return ResponseEntity.status(HttpStatus.OK).body("user is authenticated successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(jwtService.generateToken(existingUser.get().getUsername()));
     }
 }
