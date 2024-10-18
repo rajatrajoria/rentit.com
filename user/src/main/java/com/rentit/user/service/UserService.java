@@ -1,5 +1,6 @@
 package com.rentit.user.service;
 
+import com.rentit.user.config.PasswordEncoderConfig;
 import com.rentit.user.dto.UserRegistrationDTO;
 import com.rentit.user.exception.UserAlreadyExistsException;
 import com.rentit.user.model.UserEntity;
