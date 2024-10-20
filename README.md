@@ -24,7 +24,7 @@ This service manages all user-related functionality and consumes the services of
   
 - **Endpoints**:
   - `POST /users/register` – Register a new user.
-  - `POST /users/login` – User login.
+  - `POST /auth/login` – User login.
   - `GET /users/profile/{userId}` – Retrieve user profile by ID.
   - `PUT /users/update` – Update user information.
 
