@@ -3,6 +3,7 @@ package com.rentit.user.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -11,7 +12,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     // Secret key for signing tokens. It should be kept secure and stored in environment variables in production.
-    private final String SECRET_KEY = "rentitdotcomjiewbc83bcu2cb2vyucuib31c183bcuev2cv1cvcv1398cv";
+    @Value("${jwt.private.key}")
+    private String SECRET_KEY;
 
     // Generate a JWT token for a given username
     public String generateToken(String username) {
